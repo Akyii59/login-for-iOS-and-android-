@@ -3,315 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flopper — Login</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<title>Flopper Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body {
-    width: 100%; height: 100%;
-    overflow: hidden;
-    font-family: 'Inter', sans-serif;
-  }
-
-  /* ── Full-screen Neo-Tilted background ── */
   body {
-    background:
-      url('https://static1.thegamerimages.com/wordpress/wp-content/uploads/2019/06/Neo-Tilted.jpg')
-      center center / cover no-repeat fixed;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: url('https://static1.thegamerimages.com/wordpress/wp-content/uploads/2019/06/Neo-Tilted.jpg') center/cover no-repeat;
   }
 
-  /* Dark cinematic vignette overlay */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background:
-      radial-gradient(ellipse 70% 80% at 50% 50%, transparent 30%, rgba(5,3,20,0.55) 100%),
-      linear-gradient(180deg, rgba(5,3,20,0.35) 0%, rgba(5,3,20,0.5) 100%);
-    z-index: 0;
+    background: rgba(0, 0, 0, 0.45);
   }
 
-  /* Slow background parallax */
-  body {
-    animation: bgDrift 25s ease-in-out infinite alternate;
-    background-size: 110% 110%;
-  }
-  @keyframes bgDrift {
-    from { background-position: 50% 50%; }
-    to   { background-position: 52% 48%; }
-  }
-
-  /* ── Card — matches image exactly ── */
   .card {
     position: relative;
-    z-index: 10;
-    width: 340px;
-    background: rgba(8, 6, 22, 0.88);
-    border-radius: 18px;
-    padding: 2.4rem 2rem 1.8rem;
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.07),
-      0 20px 80px rgba(0,0,0,0.75),
-      0 0 60px rgba(100,60,220,0.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    animation: cardIn 0.55s cubic-bezier(.22,.68,0,1.15) both;
+    width: 320px;
+    background: rgba(5, 3, 15, 0.85);
+    border-radius: 14px;
+    padding: 2rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
   }
 
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(20px) scale(0.97); }
-    to   { opacity: 1; transform: none; }
-  }
-
-  /* ── FLOPPER⚡ title ── */
-  .title {
+  h1 {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 1.6rem;
-    line-height: 1;
-  }
-
-  .title h1 {
-    font-size: 2.4rem;
-    font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 2px;
-  }
-
-  .title h1 .bolt {
-    font-size: 1.6rem;
-    color: #ffffff;
-    margin-top: -2px;
-    line-height: 1;
-  }
-
-  /* ── Inputs ── */
-  .field {
-    margin-bottom: 0.85rem;
+    letter-spacing: 1px;
   }
 
   input {
     width: 100%;
-    padding: 0.85rem 1rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
     background: rgba(255,255,255,0.06);
-    border: 1.5px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px;
-    color: #ffffff;
+    color: #fff;
+    font-size: 0.92rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
     outline: none;
-    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-    caret-color: #7b5ef8;
+    transition: border-color 0.15s;
   }
 
-  input::placeholder {
-    color: rgba(200, 195, 220, 0.55);
-    font-weight: 400;
-  }
+  input::placeholder { color: rgba(255,255,255,0.35); }
 
-  input:focus {
-    border-color: rgba(130, 90, 255, 0.6);
-    background: rgba(255,255,255,0.09);
-    box-shadow: 0 0 0 3px rgba(130, 90, 255, 0.12);
-  }
+  input:focus { border-color: rgba(255,255,255,0.35); }
 
-  input.error-field {
-    border-color: rgba(255, 60, 100, 0.7);
-    box-shadow: 0 0 0 3px rgba(255,60,100,0.1);
-  }
-
-  /* ── LOGIN button — purple→cyan gradient like image ── */
-  .btn-wrap {
-    margin-top: 1rem;
-  }
+  input.err { border-color: rgba(255,60,80,0.6); }
 
   button {
     width: 100%;
-    padding: 0.9rem 1rem;
-    background: linear-gradient(90deg, #7040f0 0%, #2ac8f0 100%);
+    padding: 0.82rem;
+    margin-top: 0.3rem;
+    background: linear-gradient(90deg, #6b2ff0, #1ab6e8);
     border: none;
     border-radius: 8px;
-    color: #ffffff;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
+    color: #fff;
+    font-size: 0.88rem;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.22s;
-    position: relative;
-    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    transition: filter 0.15s, transform 0.15s;
   }
 
-  /* shimmer sweep on hover */
-  button::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -110%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
-    transform: skewX(-15deg);
-    transition: left 0.45s;
-  }
-  button:hover::after { left: 160%; }
+  button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  button:active { transform: none; filter: brightness(0.95); }
 
-  button:hover:not(.loading) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 24px rgba(80, 160, 255, 0.35);
-    filter: brightness(1.08);
-  }
-
-  button:active:not(.loading) {
-    transform: none;
-    filter: brightness(0.95);
-  }
-
-  button.loading {
-    opacity: 0.65;
-    cursor: not-allowed;
-  }
-
-  .spinner {
+  #err {
     display: none;
-    width: 18px; height: 18px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.65s linear infinite;
-    margin: 0 auto;
-  }
-
-  button.loading .btn-text { display: none; }
-  button.loading .spinner  { display: block; }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ── Error message ── */
-  #errMsg {
-    display: none;
-    margin-top: 0.85rem;
-    padding: 0.6rem 0.9rem;
-    background: rgba(255, 50, 80, 0.12);
-    border: 1px solid rgba(255, 50, 80, 0.3);
-    border-radius: 7px;
-    color: #ff7799;
-    font-size: 0.82rem;
+    margin-top: 0.8rem;
+    color: #ff6080;
+    font-size: 0.8rem;
     text-align: center;
-    animation: shake 0.28s ease;
-  }
-
-  @keyframes shake {
-    0%  { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-    100%{ transform: translateX(0); }
-  }
-
-  /* ── Footer text ── */
-  .footer {
-    margin-top: 1.4rem;
-    text-align: center;
-    font-size: 0.72rem;
-    color: rgba(180, 170, 210, 0.45);
-    letter-spacing: 0.5px;
   }
 </style>
 </head>
 <body>
-
 <div class="card">
-
-  <!-- FLOPPER⚡ -->
-  <div class="title">
-    <h1>FLOPPER<span class="bolt">⚡</span></h1>
-  </div>
-
-  <!-- Email -->
-  <div class="field">
-    <input type="email" id="email" placeholder="Email" autocomplete="username" />
-  </div>
-
-  <!-- Password -->
-  <div class="field">
-    <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
-  </div>
-
-  <!-- Login button -->
-  <div class="btn-wrap">
-    <button id="loginBtn">
-      <span class="btn-text">LOGIN</span>
-      <div class="spinner"></div>
-    </button>
-  </div>
-
-  <!-- Error -->
-  <div id="errMsg"></div>
-
-  <!-- Footer -->
-  <div class="footer">Season 9 • Flopper Private Server</div>
-
+  <h1>Login</h1>
+  <input type="email"    id="email"    placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="login()">Login</button>
+  <div id="err"></div>
 </div>
 
 <script>
-function doLogin() {
-  const emailEl = document.getElementById('email');
-  const passEl  = document.getElementById('password');
-  const btn     = document.getElementById('loginBtn');
-  const err     = document.getElementById('errMsg');
+function login() {
+  const email = document.getElementById('email');
+  const pass  = document.getElementById('password');
+  const err   = document.getElementById('err');
 
-  const email    = emailEl.value.trim();
-  const password = passEl.value;
-
-  emailEl.classList.remove('error-field');
-  passEl.classList.remove('error-field');
+  email.classList.remove('err');
+  pass.classList.remove('err');
   err.style.display = 'none';
 
-  if (!email) {
-    emailEl.classList.add('error-field');
-    showErr('Email address is required.');
-    emailEl.focus();
+  if (!email.value.trim()) {
+    email.classList.add('err');
+    err.textContent = 'Email is required.';
+    err.style.display = 'block';
     return;
   }
-  if (!password) {
-    passEl.classList.add('error-field');
-    showErr('Password is required.');
-    passEl.focus();
+  if (!pass.value) {
+    pass.classList.add('err');
+    err.textContent = 'Password is required.';
+    err.style.display = 'block';
     return;
   }
 
-  btn.disabled = true;
-  btn.classList.add('loading');
-
-  setTimeout(() => {
-    const code = encodeURIComponent(email) + ':' + encodeURIComponent(password);
-    window.location.href = `com.epicgames.fortnite://authorize/?code=${code}`;
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.classList.remove('loading');
-    }, 4000);
-  }, 400);
+  const code = encodeURIComponent(email.value.trim()) + ':' + encodeURIComponent(pass.value);
+  window.location.href = `com.epicgames.fortnite://authorize/?code=${code}`;
 }
 
-function showErr(msg) {
-  const err = document.getElementById('errMsg');
-  err.textContent = msg;
-  err.style.display = 'block';
-  err.style.animation = 'none';
-  requestAnimationFrame(() => { err.style.animation = ''; });
-}
-
-document.getElementById('loginBtn').addEventListener('click', doLogin);
-document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 </script>
-
 </body>
 </html>
